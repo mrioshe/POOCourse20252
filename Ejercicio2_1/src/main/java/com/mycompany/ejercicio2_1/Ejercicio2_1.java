@@ -11,6 +11,11 @@ package com.mycompany.ejercicio2_1;
 public class Ejercicio2_1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Persona persona1= new Persona("Pedro","Pérez","1053121010",1998);
+        Persona persona2= new Persona("Luis","León","1053223344",2001);
+        
+        persona1.imprimir();
+        persona2.imprimir();
+        
     }
 }
