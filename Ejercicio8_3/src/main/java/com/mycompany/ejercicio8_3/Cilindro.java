@@ -28,7 +28,7 @@ public class Cilindro extends FiguraGeometrica {
     
     public double calcularSuperficie(){
         double areaLadoA = 2.0*Math.PI*radio*altura;
-        double areaLadoB = 2.0*Math.pow(radio,2.0);
+        double areaLadoB = 2.0*Math.PI*Math.pow(radio,2.0);
         return areaLadoA + areaLadoB;
     }
     

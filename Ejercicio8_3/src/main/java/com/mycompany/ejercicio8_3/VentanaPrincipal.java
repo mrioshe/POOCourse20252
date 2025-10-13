@@ -69,7 +69,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
         if(evento.getSource()==piramide){
             VentanaPiramide piramide = new VentanaPiramide();
-            cilindro.setVisible(true);
+            piramide.setVisible(true);
         }
     
     }
