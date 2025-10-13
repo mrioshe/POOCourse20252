@@ -89,10 +89,8 @@ public class VentanaEsfera extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Campo nulo o error en formato de numero", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        
+       
         }
-    
 
     }
 }
