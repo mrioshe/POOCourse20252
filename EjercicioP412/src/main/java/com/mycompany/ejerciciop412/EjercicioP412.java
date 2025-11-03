@@ -11,6 +11,7 @@ package com.mycompany.ejerciciop412;
 public class EjercicioP412 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        VentanaPrincipal ventana=new VentanaPrincipal();
+        ventana.setVisible(true);
     }
 }
