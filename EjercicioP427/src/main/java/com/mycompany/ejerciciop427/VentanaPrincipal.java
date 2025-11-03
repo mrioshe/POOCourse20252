@@ -140,6 +140,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         txtTexto.setText("");
+        txtError.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
