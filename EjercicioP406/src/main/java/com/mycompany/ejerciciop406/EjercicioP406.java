@@ -10,7 +10,8 @@ package com.mycompany.ejerciciop406;
  */
 public class EjercicioP406 {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+       public static void main(String[] args) {
+        VentanaPrincipal ventana=new VentanaPrincipal();
+        ventana.setVisible(true);
     }
 }
