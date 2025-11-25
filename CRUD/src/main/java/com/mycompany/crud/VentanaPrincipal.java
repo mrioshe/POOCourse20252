@@ -212,9 +212,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if (name.equals(searchName)){
                     txtNombre.setText(String.valueOf(name));
                     txtNumero.setText(String.valueOf(number));
-                    found = true;
                     raf.close();
                     JOptionPane.showMessageDialog(null,"The name was found. ");
+                    found = true;
+                    break;
 
                 }               
             }
