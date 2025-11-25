@@ -63,8 +63,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre:");
 
@@ -239,6 +249,161 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnReadActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        try {
+            String nameNumberString;
+            String name;
+            long number;
+            int index;
+            String searchName = String.valueOf(txtNombre.getText());
+            long newNumber = Long.parseLong(txtNumero.getText());
+
+            File file = new File("CRUD.txt");
+            if (file.exists() == false) {
+                file.createNewFile();
+            }
+
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            boolean found = false;
+
+            while (raf.getFilePointer() < raf.length()) {
+                nameNumberString = raf.readLine();
+                String[] lineSplit = nameNumberString.split("!");
+                name = lineSplit[0];
+                number = Long.parseLong(lineSplit[1]);
+
+                if (name.equals(searchName)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found == true) {
+                File tmpFile = new File("temp.txt");
+                RandomAccessFile tmpraf = new RandomAccessFile(tmpFile, "rw");
+                raf.seek(0);
+
+                while (raf.getFilePointer() < raf.length()) {
+                    nameNumberString = raf.readLine();
+                    index = nameNumberString.indexOf('!');
+                    name = nameNumberString.substring(0, index);
+
+                    if (name.equals(searchName)) {
+                        nameNumberString = name + "!" + String.valueOf(newNumber);
+                    }
+
+                    tmpraf.writeBytes(nameNumberString);
+                    tmpraf.writeBytes(System.lineSeparator());
+                }
+
+                raf.seek(0);
+                tmpraf.seek(0);
+
+                while (tmpraf.getFilePointer() < tmpraf.length()) {
+                    raf.writeBytes(tmpraf.readLine());
+                    raf.writeBytes(System.lineSeparator());
+                }
+
+                raf.setLength(tmpraf.length());
+                tmpraf.close();
+                raf.close();
+                tmpFile.delete();
+
+                JOptionPane.showMessageDialog(null, "Friend updated. ");
+                txtNombre.setText("");
+                txtNumero.setText("");
+            } else {
+                raf.close();
+                JOptionPane.showMessageDialog(null, "The name does not exists. ");
+                txtNombre.setText("");
+                txtNumero.setText("");
+            }
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+            JOptionPane.showMessageDialog(null, "An error has ocurred creating/opening the file. ");
+        } catch (NumberFormatException nef) {
+            System.out.println(nef);
+            JOptionPane.showMessageDialog(null, "A number format has ocurred. ");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        try {
+            String nameNumberString;
+            String name;
+            long number;
+            int index;
+            String searchName = String.valueOf(txtNombre.getText());
+
+            File file = new File("CRUD.txt");
+            if (file.exists() == false) {
+                file.createNewFile();
+            }
+
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            boolean found = false;
+
+            while (raf.getFilePointer() < raf.length()) {
+                nameNumberString = raf.readLine();
+                String[] lineSplit = nameNumberString.split("!");
+                name = lineSplit[0];
+                number = Long.parseLong(lineSplit[1]);
+
+                if (name.equals(searchName)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found == true) {
+                File tmpFile = new File("temp.txt");
+                RandomAccessFile tmpraf = new RandomAccessFile(tmpFile, "rw");
+                raf.seek(0);
+
+                while (raf.getFilePointer() < raf.length()) {
+                    nameNumberString = raf.readLine();
+                    index = nameNumberString.indexOf('!');
+                    name = nameNumberString.substring(0, index);
+
+                    if (name.equals(searchName)) {
+                        continue;
+                    }
+
+                    tmpraf.writeBytes(nameNumberString);
+                    tmpraf.writeBytes(System.lineSeparator());
+                }
+
+                raf.seek(0);
+                tmpraf.seek(0);
+
+                while (tmpraf.getFilePointer() < tmpraf.length()) {
+                    raf.writeBytes(tmpraf.readLine());
+                    raf.writeBytes(System.lineSeparator());
+                }
+
+                raf.setLength(tmpraf.length());
+                tmpraf.close();
+                raf.close();
+                tmpFile.delete();
+
+                JOptionPane.showMessageDialog(null, "Friend deleted. ");
+                txtNombre.setText("");
+                txtNumero.setText("");
+            } else {
+                raf.close();
+                JOptionPane.showMessageDialog(null, "The name does not exists. ");
+                txtNombre.setText("");
+                txtNumero.setText("");
+            }
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+            JOptionPane.showMessageDialog(null, "An error has ocurred creating/opening the file. ");
+        } catch (NumberFormatException nef) {
+            System.out.println(nef);
+            JOptionPane.showMessageDialog(null, "A number format has ocurred. ");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
